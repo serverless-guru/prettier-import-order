@@ -1,0 +1,61 @@
+{
+    "name": "@serverless-guru/prettier-plugin-import-order",
+    "private": false,
+    "version": "0.0.0-beta.1",
+    "description": "A prettier plugin to sort TS/JS import declarations by provided Regular Expression order",
+    "main": "lib/src/index.js",
+    "repository": {
+        "url": "https://github.com/serverless-guru/prettier-import-order",
+        "type": "git"
+    },
+    "homepage": "https://github.com/serverless-guru/prettier-import-order#readme",
+    "scripts": {
+        "prepare": "yarn run compile",
+        "compile": "tsc",
+        "preexample": "yarn run compile",
+        "example": "prettier --config ./examples/.prettierrc --plugin lib/src/index.js ./examples",
+        "test": "jest -i",
+        "type-check": "tsc --noEmit",
+        "prepublishOnly": "npm run compile && npm run test",
+        "prettier:fix": "npx prettier --write '**/*.{ts,js,json,yml,yaml,md}'"
+    },
+    "keywords": [
+        "prettier",
+        "plugin",
+        "sort",
+        "order",
+        "import",
+        "typescript",
+        "javascript"
+    ],
+    "license": "APACHE LICENSE, VERSION 2.0",
+    "dependencies": {
+        "@babel/core": "~7.19.3",
+        "@babel/generator": "~7.19.5",
+        "@babel/parser": "~7.19.4",
+        "@babel/traverse": "~7.19.4",
+        "@babel/types": "~7.19.4",
+        "javascript-natural-sort": "0.7.1",
+        "lodash.clone": "~4.5.0",
+        "lodash.isequal": "~4.5.0"
+    },
+    "devDependencies": {
+        "@babel/preset-typescript": "7.18.6",
+        "@types/babel__generator": "^7.6.4",
+        "@types/babel__traverse": "^7.18.2",
+        "@types/jest": "29.2.0",
+        "@types/lodash.clone": "4.5.7",
+        "@types/lodash.isequal": "4.5.6",
+        "@types/node": "^17.0.21",
+        "jest": "29.2.1",
+        "prettier": "2.7.1",
+        "ts-jest": "29.0.3",
+        "typescript": "4.8.4"
+    },
+    "peerDependencies": {
+        "prettier": "2.x"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}
