@@ -67,11 +67,11 @@ import { add, filter, repeat } from '../utils';
 ## Install
 
 ```shell
-npm install @serverless-guru/prettier-plugin-import-order@0.0.0-beta.1 --save-dev
+npm install @serverless-guru/prettier-plugin-import-order --save-dev
 ```
 
 ```shell
-yarn add @serverless-guru/prettier-plugin-import-order@0.0.0-beta.1 -D
+yarn add @serverless-guru/prettier-plugin-import-order -D
 ```
 
 ## Usage
