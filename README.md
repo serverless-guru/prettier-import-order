@@ -88,7 +88,7 @@ Add your preferred settings in your prettier config file.
     "importOrderMergeDuplicateImports": true,
     "importOrderSeparation": true,
     "importOrderSortIndividualImports": true,
-};
+}
 ```
 
 _Note: all flags are off by default, so explore your options [below](#apis)_
