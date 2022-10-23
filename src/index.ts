@@ -3,9 +3,11 @@ import type { PrettierOptions } from './types';
 
 import { parsers as babelParsers } from 'prettier/parser-babel';
 import { parsers as flowParsers } from 'prettier/parser-flow';
+import { parsers as htmlParsers } from 'prettier/parser-html';
 import { parsers as typescriptParsers } from 'prettier/parser-typescript';
 
-import { preprocessor } from './preprocessor';
+import { defaultPreprocessor } from './preprocessors/default-processor';
+import { vuePreprocessor } from './preprocessors/vue-preprocessor';
 
 interface PrettierOptionSchema {
     type: string;
@@ -87,15 +89,19 @@ module.exports = {
     parsers: {
         babel: {
             ...babelParsers.babel,
-            preprocess: preprocessor,
+            preprocess: defaultPreprocessor,
         },
         flow: {
             ...flowParsers.flow,
-            preprocess: preprocessor,
+            preprocess: defaultPreprocessor,
         },
         typescript: {
             ...typescriptParsers.typescript,
-            preprocess: preprocessor,
+            preprocess: defaultPreprocessor,
+        },
+        vue: {
+            ...htmlParsers.vue,
+            preprocess: vuePreprocessor,
         },
     },
     options,
