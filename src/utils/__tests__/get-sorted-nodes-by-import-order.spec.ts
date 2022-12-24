@@ -30,6 +30,7 @@ test('it returns all sorted nodes', () => {
         importOrder: ['^[./]'],
         importOrderBuiltinModulesToTop: false,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderCaseInsensitive: false,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderMergeDuplicateImports: false,
@@ -83,6 +84,7 @@ test('it returns all sorted nodes case-insensitive', () => {
         importOrder: ['^[./]'],
         importOrderBuiltinModulesToTop: false,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderCaseInsensitive: true,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderMergeDuplicateImports: false,
@@ -136,6 +138,7 @@ test('it returns all sorted nodes with sort order', () => {
         importOrder: ['^a$', '^t$', '^k$', '^B', '^[./]'],
         importOrderBuiltinModulesToTop: false,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderCaseInsensitive: false,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderMergeDuplicateImports: false,
@@ -189,6 +192,7 @@ test('it returns all sorted nodes with sort order case-insensitive', () => {
         importOrder: ['^a$', '^t$', '^k$', '^B', '^[./]'],
         importOrderBuiltinModulesToTop: false,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderCaseInsensitive: true,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderMergeDuplicateImports: false,
@@ -241,6 +245,7 @@ test('it returns all sorted import nodes with sorted import specifiers', () => {
         importOrder: ['^a$', '^t$', '^k$', '^B', '^[./]'],
         importOrderBuiltinModulesToTop: false,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderCaseInsensitive: false,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderMergeDuplicateImports: false,
@@ -293,6 +298,7 @@ test('it returns all sorted import nodes with sorted import specifiers with case
         importOrder: ['^a$', '^t$', '^k$', '^B', '^[./]'],
         importOrderBuiltinModulesToTop: false,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderCaseInsensitive: true,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderMergeDuplicateImports: false,
@@ -345,6 +351,7 @@ test('it returns all sorted nodes with custom third party modules', () => {
         importOrder: ['^a$', '<THIRD_PARTY_MODULES>', '^t$', '^k$', '^[./]'],
         importOrderBuiltinModulesToTop: false,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderCaseInsensitive: true,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderMergeDuplicateImports: false,
@@ -376,6 +383,7 @@ test('it returns all sorted nodes with namespace specifiers at the top', () => {
         importOrder: ['^[./]'],
         importOrderBuiltinModulesToTop: false,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderCaseInsensitive: false,
         importOrderNamespaceImportsToGroupTop: true,
         importOrderMergeDuplicateImports: false,
@@ -409,6 +417,7 @@ test('it returns all sorted nodes with builtin specifiers at the top, ', () => {
         importOrderBuiltinModulesToTop: true,
         importOrderCaseInsensitive: false,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderMergeDuplicateImports: false,
         importOrderSeparation: false,
@@ -442,6 +451,7 @@ test('it returns all sorted nodes with custom third party modules and builtins a
         importOrderCaseInsensitive: true,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderMergeDuplicateImports: false,
         importOrderSeparation: false,
         importOrderSortIndividualImports: false,
@@ -471,6 +481,7 @@ test('it adds newlines when importOrderSeparation is true', () => {
         importOrder: ['^[./]'],
         importOrderBuiltinModulesToTop: true,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderCaseInsensitive: true,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderMergeDuplicateImports: false,
@@ -505,6 +516,7 @@ test('it returns all sorted nodes with custom separation', () => {
         importOrder: ['^a$', '<THIRD_PARTY_MODULES>', '^t$', '', '^k$', '^[./]'],
         importOrderBuiltinModulesToTop: false,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderCaseInsensitive: true,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderMergeDuplicateImports: false,
@@ -537,6 +549,7 @@ test('it allows both importOrderSeparation and custom separation (but why?)', ()
         importOrder: ['^a$', '<THIRD_PARTY_MODULES>', '^t$', '', '^k$', '^[./]'],
         importOrderBuiltinModulesToTop: false,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderCaseInsensitive: true,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderMergeDuplicateImports: false,
@@ -573,6 +586,7 @@ test('it does not add multiple custom import separators', () => {
         importOrder: ['^a$', '<THIRD_PARTY_MODULES>', '^t$', '', 'notfound', '', '^k$', '^[./]'],
         importOrderBuiltinModulesToTop: false,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderCaseInsensitive: true,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderMergeDuplicateImports: false,
@@ -599,7 +613,7 @@ test('it does not add multiple custom import separators', () => {
     ]);
 });
 
-test('it sorts types also', () => {
+test('it sorts types to top', () => {
     const newCode = `
     ${code}
     import type { Jf } from '../nlwa';
@@ -610,6 +624,7 @@ test('it sorts types also', () => {
         importOrder: ['^a$', '<THIRD_PARTY_MODULES>', '^t$', '', 'notfound', '', '^k$', '^[./]'],
         importOrderBuiltinModulesToTop: false,
         importOrderTypeImportsToTop: true,
+        importOrderTypeImportsToBottom: false,
         importOrderCaseInsensitive: true,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderMergeDuplicateImports: false,
@@ -634,5 +649,44 @@ test('it sorts types also', () => {
         '',
         'k',
         './local',
+    ]);
+});
+
+test('it sorts types to bottom', () => {
+    const newCode = `
+    ${code}
+    import type { Jf } from '../nlwa';
+    `;
+
+    const result = getImportNodes(newCode);
+    const sorted = getSortedNodesByImportOrder(result, {
+        importOrder: ['^a$', '<THIRD_PARTY_MODULES>', '^t$', '', 'notfound', '', '^k$', '^[./]'],
+        importOrderBuiltinModulesToTop: false,
+        importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: true,
+        importOrderCaseInsensitive: true,
+        importOrderNamespaceImportsToGroupTop: false,
+        importOrderMergeDuplicateImports: false,
+        importOrderSeparation: false,
+        importOrderSortIndividualImports: false,
+    }) as ImportDeclaration[];
+    expect(getSortedNodesNamesAndNewlines(sorted)).toEqual([
+        'a',
+        'BY',
+        'c',
+        'g',
+        'node:fs/promises',
+        'node:url',
+        'x',
+        'XY',
+        'z',
+        '',
+        'k',
+        './local',
+        'Ba',
+        'path',
+        't',
+        'Xa',
+        '../nlwa',
     ]);
 });

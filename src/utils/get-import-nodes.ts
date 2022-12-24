@@ -10,7 +10,7 @@ export const getImportNodes = (code: string, options?: ParserOptions): ImportDec
         sourceType: 'module',
     });
 
-    traverse(ast, {
+    traverse(ast as Parameters<typeof traverse>[0], {
         ImportDeclaration(path: NodePath<ImportDeclaration>) {
             const tsModuleParent = path.findParent((p) => isTSModuleDeclaration(p));
             if (!tsModuleParent) {

@@ -12,6 +12,7 @@ const getSortedImportNodes = (code: string, options?: ParserOptions) => {
         importOrder: [],
         importOrderBuiltinModulesToTop: false,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderCaseInsensitive: false,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderMergeDuplicateImports: false,

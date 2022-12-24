@@ -29,12 +29,32 @@ export const getSortedNodesByImportOrder: GetSortedNodes = (nodes, options) => {
         importOrderSeparation,
         importOrderSortIndividualImports,
         importOrderTypeImportsToTop,
+        importOrderTypeImportsToBottom,
         importOrderNamespaceImportsToGroupTop,
         importOrderBuiltinModulesToTop,
     } = options;
 
     const manyImportStatements = nodes.map<ImportDeclaration>(clone);
     const finalImportStmntGroups: ImportOrLine[] = [];
+
+    /**
+     * Anatomy of a import node
+     *
+     * import * BY from 'BY' or './By'
+     * By is a ImportNamespaceSpecifier, where its local identifier is BY
+     *
+     * import BY from 'BY' or './By'
+     * By is a ImportDefaultSpecifier, where its local identifier is BY
+     *
+     * import Z, { BY, XX }  from 'BY'
+     * This node has three specifiers, BY and XX are ImportSpecifier(s) and Z is a ImportDefaultSpecifier
+     *
+     * import { P as T }  from 'BY'
+     * P is a ImportSpecifier(s), where its local identifier is T
+     *
+     * node: { kind:'type or value', specifiers: [list of imported values/types] }
+     *
+     */
 
     /**
      * If the user has not specified third party module indentifier
@@ -52,12 +72,24 @@ export const getSortedNodesByImportOrder: GetSortedNodes = (nodes, options) => {
         importOrder = [BUILTIN_MODULES, ...importOrder];
     }
 
+    let handleTypes = false;
+
     /**
      * If the user has enabled import types to top
      * We add it to the top, even higher than built in modules
      */
     if (importOrderTypeImportsToTop) {
+        handleTypes = true;
         importOrder = [TYPE_IMPORTS_SPECIAL_WORD, ...importOrder];
+    }
+
+    /**
+     * If the user has enabled import types to bottom
+     * We add it to the bottom, even higher than built in modules
+     */
+    if (importOrderTypeImportsToBottom) {
+        handleTypes = true;
+        importOrder = [...importOrder, TYPE_IMPORTS_SPECIAL_WORD];
     }
 
     /**
@@ -79,7 +111,7 @@ export const getSortedNodesByImportOrder: GetSortedNodes = (nodes, options) => {
 
     /**
      * Give all import order except new lines or third party special word
-     * This means these are all user provided regex
+     * This means these are all user provided regex and types
      */
     const importOrderWithoutEmptyLinesOrThirdPartyRegex = importOrder.filter(
         (group) => !isNewLineSeparator(group) && group !== THIRD_PARTY_MODULES_SPECIAL_WORD,
@@ -87,7 +119,11 @@ export const getSortedNodesByImportOrder: GetSortedNodes = (nodes, options) => {
 
     // Assign import nodes into import order groups
     for (const importStatement of manyImportStatements) {
-        const matchedGroup = getMatchedGroup(importStatement, importOrderWithoutEmptyLinesOrThirdPartyRegex);
+        const matchedGroup = getMatchedGroup(
+            importStatement,
+            importOrderWithoutEmptyLinesOrThirdPartyRegex,
+            handleTypes,
+        );
         /**
          * Append this import statment to our key, values map
          */

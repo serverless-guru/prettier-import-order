@@ -18,6 +18,7 @@ export interface PrettierOptions extends RequiredOptions {
     importOrderCaseInsensitive: boolean;
     importOrderBuiltinModulesToTop: boolean;
     importOrderTypeImportsToTop: boolean;
+    importOrderTypeImportsToBottom: boolean;
     importOrderNamespaceImportsToGroupTop: boolean;
     importOrderMergeDuplicateImports: boolean;
     /**
@@ -51,6 +52,7 @@ export type GetSortedNodes = (
         | 'importOrder'
         | 'importOrderBuiltinModulesToTop'
         | 'importOrderTypeImportsToTop'
+        | 'importOrderTypeImportsToBottom'
         | 'importOrderCaseInsensitive'
         | 'importOrderNamespaceImportsToGroupTop'
         | 'importOrderMergeDuplicateImports'
