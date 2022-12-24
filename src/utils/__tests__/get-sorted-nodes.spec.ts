@@ -31,6 +31,7 @@ test('it returns all sorted nodes, preserving the order side effect nodes', () =
         importOrder: [],
         importOrderBuiltinModulesToTop: false,
         importOrderTypeImportsToTop: false,
+        importOrderTypeImportsToBottom: false,
         importOrderCaseInsensitive: false,
         importOrderNamespaceImportsToGroupTop: false,
         importOrderMergeDuplicateImports: false,

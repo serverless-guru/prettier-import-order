@@ -40,6 +40,12 @@ const options: Record<Exclude<keyof PrettierOptions, keyof PrettierRequiredOptio
         default: false,
         description: 'Move all the imports that start with the `type` to top',
     },
+    importOrderTypeImportsToBottom: {
+        type: 'boolean',
+        category: 'Global',
+        default: false,
+        description: 'Move all the imports that start with the `type` to bottom',
+    },
     importOrderParserPlugins: {
         type: 'path',
         category: 'Global',

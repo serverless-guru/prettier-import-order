@@ -62,7 +62,7 @@ export const getCodeFromAst = ({
         },
     });
 
-    const { code } = generate(newAST);
+    const { code } = generate(newAST as Parameters<typeof generate>[0]);
 
     return (
         code.replace(/"PRETTIER_PLUGIN_SORT_IMPORTS_NEW_LINE";/gi, newLineCharacters) +

@@ -21,6 +21,7 @@ export function preprocessor(code: string, options: PrettierOptions): string {
         importOrder,
         importOrderBuiltinModulesToTop,
         importOrderTypeImportsToTop,
+        importOrderTypeImportsToBottom,
         importOrderCaseInsensitive,
         importOrderNamespaceImportsToGroupTop,
         importOrderMergeDuplicateImports,
@@ -45,7 +46,7 @@ export function preprocessor(code: string, options: PrettierOptions): string {
 
     const interpreter = ast.program.interpreter;
 
-    traverse(ast, {
+    traverse(ast as Parameters<typeof traverse>[0], {
         ImportDeclaration(path: NodePath<ImportDeclaration>) {
             const tsModuleParent = path.findParent((p) => isTSModuleDeclaration(p));
             if (!tsModuleParent) {
@@ -53,6 +54,12 @@ export function preprocessor(code: string, options: PrettierOptions): string {
             }
         },
     });
+
+    if (importOrderTypeImportsToTop && importOrderTypeImportsToBottom) {
+        console.warn(
+            "[@serverless-guru/prettier-plugin-import-order]: `importOrderTypeImportsToTop` and `importOrderTypeImportsToBottom` can't both be true. `importOrderTypeImportsToTop` will be used.",
+        );
+    }
 
     // short-circuit if there are no import declarations
     if (allOriginalImportNodes.length === 0) {
@@ -63,6 +70,10 @@ export function preprocessor(code: string, options: PrettierOptions): string {
         importOrder,
         importOrderBuiltinModulesToTop,
         importOrderTypeImportsToTop,
+        // if both importOrderTypeImportsToTop and importOrderTypeImportsToBottom and set to true
+        // importOrderTypeImportsToBottom is set to false
+        importOrderTypeImportsToBottom:
+            importOrderTypeImportsToBottom && importOrderTypeImportsToTop ? false : importOrderTypeImportsToBottom,
         importOrderCaseInsensitive,
         importOrderNamespaceImportsToGroupTop,
         importOrderMergeDuplicateImports,

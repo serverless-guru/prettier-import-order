@@ -82,6 +82,7 @@ Add your preferred settings in your prettier config file.
 {
     "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
     "importOrderTypeImportsToTop": true,
+    "importOrderTypeImportsToBottom": false,
     "importOrderBuiltinModulesToTop": true,
     "importOrderCaseInsensitive": false,
     "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
@@ -269,6 +270,14 @@ A boolean value to enable sorting of [`node builtins`](https://nodejs.org/api/mo
 
 A boolean value to enable sorting of [`type imports`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) to the top of all import groups. Even higher than builtin modules if that setting is on.
 
+#### `importOrderTypeImportsToBottom`
+
+**type**: `boolean`
+
+**default value:** `false`
+
+A boolean value to enable sorting of [`type imports`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) to the bottom of all import groups.
+
 ### How does import sort work?
 
 The plugin extracts the imports which are defined in `importOrder`. These imports are considered as _local imports_.
@@ -327,7 +336,7 @@ Having some trouble or an issue? You can check [FAQ / Troubleshooting section](.
 | NodeJS with ES Modules | ✅ Everything            | -                                                |
 | React                  | ✅ Everything            | -                                                |
 | Angular                | ✅ Everything            | Supported through `importOrderParserPlugins` API |
-| Vue                    | ✅ Everything            | -                                                |
+| Vue                    | ✅ Everything            | Peer dependency `@vue/compiler-sfc` is required  |
 
 ## Contribution
 
