@@ -38,7 +38,7 @@ const options: Record<Exclude<keyof PrettierOptions, keyof PrettierRequiredOptio
         type: 'boolean',
         category: 'Global',
         default: false,
-        description: 'Move all the imports that start with the `type` to top',
+        description: 'Move all the imports that start with the `type` keyword to top',
     },
     importOrderTypeImportsToBottom: {
         type: 'boolean',

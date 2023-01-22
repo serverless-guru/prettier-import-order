@@ -79,6 +79,9 @@ yarn add @serverless-guru/prettier-plugin-import-order -D
 Add your preferred settings in your prettier config file.
 
 ```json
+// @ts-check
+
+/** @type {import("@serverless-guru/prettier-plugin-import-order").PrettierConfig} */
 {
     "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
     "importOrderTypeImportsToTop": true,
