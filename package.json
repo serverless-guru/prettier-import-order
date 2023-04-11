@@ -1,7 +1,7 @@
 {
     "name": "@serverless-guru/prettier-plugin-import-order",
     "private": false,
-    "version": "0.4.1",
+    "version": "0.4.2",
     "description": "A prettier plugin to sort TS/JS import declarations by provided Regular Expression order",
     "main": "lib/src/index.js",
     "types": "types/index.d.ts",
